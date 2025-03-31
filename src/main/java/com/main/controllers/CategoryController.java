@@ -16,35 +16,26 @@ public class CategoryController {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    /**
-     * Get all categories with pagination
-     * Default: page = 0, size = 5
-     */
+   //  Get all categories with pagination
     @GetMapping
     public Page<Category> getAllCategories(@RequestParam(defaultValue = "0") int page,
                                            @RequestParam(defaultValue = "5") int size) {
         return categoryRepository.findAll(PageRequest.of(page, size));
     }
 
-    /**
-     * Create a new category
-     */
+  // Create a new category
     @PostMapping
     public Category createCategory(@RequestBody Category category) {
         return categoryRepository.save(category);
     }
 
-    /**
-     * Get category by ID
-     */
+   // Get category by ID
     @GetMapping("/{id}")
     public Optional<Category> getCategoryById(@PathVariable Long id) {
         return categoryRepository.findById(id);
     }
 
-    /**
-     * Update category by ID
-     */
+  // Update category by ID
     @PutMapping("/{id}")
     public Category updateCategory(@PathVariable Long id, @RequestBody Category updatedCategory) {
         return categoryRepository.findById(id)
@@ -54,9 +45,7 @@ public class CategoryController {
                 }).orElseThrow(() -> new RuntimeException("Category not found"));
     }
 
-    /**
-     * Delete category by ID
-     */
+//  Delete category by ID
     @DeleteMapping("/{id}")
     public String deleteCategory(@PathVariable Long id) {
         categoryRepository.deleteById(id);
